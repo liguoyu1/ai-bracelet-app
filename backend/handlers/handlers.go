@@ -3,7 +3,9 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -659,7 +661,13 @@ func (h *OrderHandler) CreatePaymentIntent(w http.ResponseWriter, r *http.Reques
 		fail(w, 400, "order already paid or cancelled")
 		return
 	}
-	success(w, map[string]interface{}{"checkout_url": "/order-status?order_id=" + id, "amount": totalCents})
+	checkout, err := h.AirwallexClient.CreateCheckoutSession(totalCents, "usd", id, nil)
+	if err != nil {
+		fail(w, 500, "failed to create payment: "+err.Error())
+		return
+	}
+	_, _ = h.Pool.Exec(r.Context(), `UPDATE orders SET stripe_payment_intent_id=$1 WHERE id=$2`, checkout.ID, id)
+	success(w, map[string]interface{}{"checkout_url": checkout.URL, "amount": totalCents, "payment_id": checkout.ID})
 }
 
 func (h *OrderHandler) UpdateStatus(w http.ResponseWriter, r *http.Request) {
@@ -867,6 +875,16 @@ func (h *UploadHandler) Upload(w http.ResponseWriter, r *http.Request) {
 	}
 	defer file.Close()
 	filename := fmt.Sprintf("%d_%s", time.Now().UnixNano(), header.Filename)
+		dst, err := os.Create("/data/uploads/" + filename)
+	if err != nil {
+		fail(w, 500, "failed to save file: "+err.Error())
+		return
+	}
+	defer dst.Close()
+	if _, err := io.Copy(dst, file); err != nil {
+		fail(w, 500, "failed to write file: "+err.Error())
+		return
+	}
 	success(w, map[string]interface{}{"url": "/uploads/" + filename, "filename": filename})
 }
 

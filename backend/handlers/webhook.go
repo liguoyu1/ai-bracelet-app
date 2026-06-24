@@ -1,6 +1,9 @@
 package handlers
 
 import (
+	"crypto/hmac"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -16,6 +19,13 @@ type WebhookHandler struct {
 	AirwallexClient *services.AirwallexClient
 }
 
+func verifyHMAC(body []byte, signature, key string) bool {
+	mac := hmac.New(sha256.New, []byte(key))
+	mac.Write(body)
+	expected := hex.EncodeToString(mac.Sum(nil))
+	return hmac.Equal([]byte(signature), []byte(expected))
+}
+
 func (h *WebhookHandler) HandleAirwallex(w http.ResponseWriter, r *http.Request) {
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
@@ -23,6 +33,15 @@ func (h *WebhookHandler) HandleAirwallex(w http.ResponseWriter, r *http.Request)
 		return
 	}
 	defer r.Body.Close()
+
+	// Verify HMAC signature
+	sig := r.Header.Get("x-signature")
+	if sig != "" && h.AirwallexClient != nil && h.AirwallexClient.WebhookKey != "" {
+		if !verifyHMAC(body, sig, h.AirwallexClient.WebhookKey) {
+			fail(w, 401, "invalid signature")
+			return
+		}
+	}
 
 	// Parse Airwallex webhook event
 	var event struct {
