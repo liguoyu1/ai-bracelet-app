@@ -41,11 +41,11 @@ export function getProducts(params) {
 
 export function getProduct(id) {
   return api.get(`/products?limit=247`).then(res => {
-    // find product by id in list results (backend /products/:id route has a bug)
-    const products = res.data?.data || []
+    const products = res.data || []
     const found = products.find(p => p.id === id)
     if (found) return { data: found }
-    throw new Error('Product not found')
+    // fallback: try fetching from specific ID (for after backend fix)
+    return api.get(`/products/${id}`)
   })
 }
 

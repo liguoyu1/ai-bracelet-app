@@ -536,6 +536,7 @@ onMounted(() => {
 .element-grid-wrap {
   flex: 1;
   overflow-y: auto;
+  padding: 12px 16px 90px;
 }
 .element-grid {
   display: grid;
@@ -596,7 +597,7 @@ onMounted(() => {
 /* Action Buttons */
 .action-bar {
   position: fixed;
-  bottom: 0;
+  bottom: 70px;
   left: 0;
   right: 0;
   display: flex;

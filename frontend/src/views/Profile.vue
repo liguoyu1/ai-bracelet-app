@@ -47,7 +47,9 @@
 
         <!-- Orders Section -->
         <div class="section">
-          <h3 class="section-title">{{ t('profile.orders') || 'Orders' }}</h3>
+          <h3 class="section-title">{{ t('profile.orders') || 'Orders' }}
+            <span v-if="orders.length" class="section-badge">{{ orders.length }}</span>
+          </h3>
           <div v-if="loadingOrders" class="loading-state"><div class="spinner"></div></div>
           <div v-else-if="!orders.length" class="empty-state">{{ t('profile.noOrders') || 'No orders yet' }}</div>
           <div v-else>
@@ -65,6 +67,35 @@
                 <span class="order-date">{{ formatDate(o.created_at) }}</span>
               </div>
             </div>
+            <router-link v-if="orders.length > 5" to="/profile/orders" class="see-all">{{ t('profile.seeAll') || 'See All' }}</router-link>
+          </div>
+        </div>
+
+        <!-- Favorites Section -->
+        <div class="section">
+          <h3 class="section-title">{{ t('profile.favorites') || 'Favorites' }}</h3>
+          <div v-if="!fav.ids.length" class="empty-state">{{ t('profile.noFavorites') || 'No favorites yet' }}</div>
+          <div v-else class="fav-grid">
+            <div v-for="id in fav.ids.slice(0, 10)" :key="id" class="card fav-card" @click="$router.push('/products/' + id)">
+              <span class="fav-icon">❤️</span>
+              <span class="fav-id">{{ id.slice(0, 8) }}...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Addresses Section -->
+        <div class="section">
+          <h3 class="section-title">{{ t('profile.addresses') || 'Addresses' }}</h3>
+          <div v-if="loadingAddresses" class="loading-state"><div class="spinner"></div></div>
+          <div v-else>
+            <div v-for="(addr, i) in addresses" :key="i" class="card address-card">
+              <div class="address-info">
+                <span class="address-name">{{ addr.name }}</span>
+                <span class="address-detail">{{ addr.address }}, {{ addr.city }}, {{ addr.state }} {{ addr.zip }}</span>
+              </div>
+              <button class="address-delete" @click="deleteAddress(i)">✕</button>
+            </div>
+            <button class="btn-add-address" @click="showAddAddress = true">+ {{ t('profile.addAddress') || 'Add Address' }}</button>
           </div>
         </div>
 
@@ -176,6 +207,26 @@
         </div>
       </div>
     </div>
+    <!-- Add Address Dialog -->
+    <div v-if="showAddAddress" class="dialog-overlay" @click.self="showAddAddress = false">
+      <div class="dialog">
+        <h3 class="dialog-title">{{ t('profile.addAddress') || 'Add Address' }}</h3>
+        <div class="dialog-field"><label>{{ t('order.fullName') || 'Full Name' }}</label><input v-model="newAddress.name" /></div>
+        <div class="dialog-field"><label>{{ t('order.address') || 'Address' }}</label><input v-model="newAddress.address" /></div>
+        <div class="dialog-field dialog-row">
+          <div><label>{{ t('order.city') || 'City' }}</label><input v-model="newAddress.city" /></div>
+          <div><label>{{ t('order.state') || 'State' }}</label><input v-model="newAddress.state" /></div>
+        </div>
+        <div class="dialog-field dialog-row">
+          <div><label>{{ t('order.zip') || 'ZIP' }}</label><input v-model="newAddress.zip" /></div>
+          <div><label>{{ t('order.country') || 'Country' }}</label><input v-model="newAddress.country" /></div>
+        </div>
+        <div class="dialog-actions">
+          <button class="btn-cancel" @click="showAddAddress = false">{{ t('profile.cancel') || 'Cancel' }}</button>
+          <button class="btn-gold" @click="addAddress">{{ t('profile.save') || 'Save' }}</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -184,11 +235,34 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from '../composables/useI18n'
 import { useAuthStore } from '../stores/auth'
+import { useFavoriteStore } from '../stores/favorites'
 import { getOrders, getMyDesigns, getEarnings, updateProfile, updateDesign, publishDesign } from '../api'
 
 const { t, lang, setLanguage, locales, flags, names } = useI18n()
 const auth = useAuthStore()
 const router = useRouter()
+const fav = useFavoriteStore()
+
+// Addresses (localStorage, max 10)
+const addresses = ref(JSON.parse(localStorage.getItem('addresses') || '[]'))
+const loadingAddresses = ref(false)
+const showAddAddress = ref(false)
+const newAddress = ref({ name: '', address: '', city: '', state: '', zip: '', country: 'US', phone: '' })
+
+function addAddress() {
+  if (addresses.value.length >= 10) return
+  const a = newAddress.value
+  if (!a.name || !a.address) return
+  addresses.value.push({ ...a })
+  localStorage.setItem('addresses', JSON.stringify(addresses.value))
+  newAddress.value = { name: '', address: '', city: '', state: '', zip: '', country: 'US', phone: '' }
+  showAddAddress.value = false
+}
+
+function deleteAddress(i) {
+  addresses.value.splice(i, 1)
+  localStorage.setItem('addresses', JSON.stringify(addresses.value))
+}
 
 // State
 const orders = ref([])
