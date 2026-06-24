@@ -759,13 +759,13 @@ func (h *EnergyHandler) Assess(w http.ResponseWriter, r *http.Request) {
 		recommendations[i] = r
 	}
 	recJSON, _ := json.Marshal(recommendations)
-	rawInput, _ := json.Marshal(req)
+	prefJSON, _ := json.Marshal(map[string]string{"preferred_element": req.PreferredElement})
+	extraInput, _ := json.Marshal(map[string]string{"concerns": req.Concerns, "lifestyle": req.Lifestyle})
 	var assessment models.EnergyAssessment
 	h.Pool.QueryRow(r.Context(),
-		`INSERT INTO energy_assessments (user_id, birth_date, zodiac_sign, preferred_element, concerns, lifestyle, raw_input, ai_response, recommendations)
-		 VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING id, created_at`,
-		userID, req.BirthDate, req.ZodiacSign, req.PreferredElement, req.Concerns, req.Lifestyle,
-		string(rawInput), string(recJSON), string(recJSON),
+		`INSERT INTO energy_assessments (user_id, birth_date, zodiac_sign, preferences, raw_input, ai_response, recommendations)
+		 VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING id, created_at`,
+		userID, req.BirthDate, req.ZodiacSign, string(prefJSON), string(extraInput), string(recJSON), string(recJSON),
 	).Scan(&assessment.ID, &assessment.CreatedAt)
 	success(w, map[string]interface{}{"assessment_id": assessment.ID, "recommendations": recommendations})
 }
