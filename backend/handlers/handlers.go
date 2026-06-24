@@ -221,7 +221,7 @@ func (h *ProductHandler) Get(w http.ResponseWriter, r *http.Request) {
 	var i18nVal interface{}
 	err := h.Pool.QueryRow(r.Context(),
 	`SELECT id, name, slug, description, price_cents, images, category, tags, materials, stock, sales_count, created_at, updated_at, i18n
-	 FROM products WHERE (id::text=$1 OR slug=$1)`, id,
+		 FROM products WHERE (id=$1::uuid OR slug=$1)`, id,
 	).Scan(&p.ID, &p.Name, &p.Slug, &p.Description, &p.PriceCents, &p.Images, &p.Category, &p.Tags, &p.Materials, &p.Stock, &p.SalesCount, &p.CreatedAt, &p.UpdatedAt, &i18nVal)
 	if err != nil {
 		fail(w, 404, "product not found: "+err.Error())
