@@ -1,0 +1,21 @@
+-- Update all 20 new products with real images
+UPDATE products SET images = '{"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&h=600&fit=crop","https://placehold.co/600x600/1a1a1a/C8A45C?text=Amethyst"}'::text[] WHERE slug = 'amethyst-spiritual-protection';
+UPDATE products SET images = '{"https://images.unsplash.com/photo-1600612253971-422e7f7faeb6?w=600&h=600&fit=crop","https://placehold.co/600x600/1a1a1a/C8A45C?text=Rose+Quartz"}'::text[] WHERE slug = 'rose-quartz-love';
+UPDATE products SET images = '{"https://placehold.co/600x600/1a1a1a/C8A45C?text=Tiger+Eye","https://placehold.co/600x600/1a1a1a/C8A45C?text=Confidence"}'::text[] WHERE slug = 'tiger-eye-confidence';
+UPDATE products SET images = '{"https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=600&h=600&fit=crop","https://placehold.co/600x600/1a1a1a/C8A45C?text=Obsidian"}'::text[] WHERE slug = 'black-obsidian-protection';
+UPDATE products SET images = '{"https://placehold.co/600x600/1a1a1a/C8A45C?text=Citrine","https://placehold.co/600x600/1a1a1a/C8A45C?text=Wealth"}'::text[] WHERE slug = 'citrine-wealth-attraction';
+UPDATE products SET images = '{"https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&h=600&fit=crop","https://placehold.co/600x600/1a1a1a/C8A45C?text=Aventurine"}'::text[] WHERE slug = 'green-aventurine-luck';
+UPDATE products SET images = '{"https://placehold.co/600x600/1a1a1a/C8A45C?text=Carnelian","https://placehold.co/600x600/1a1a1a/C8A45C?text=Creativity"}'::text[] WHERE slug = 'carnelian-creativity';
+UPDATE products SET images = '{"https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&h=600&fit=crop","https://placehold.co/600x600/1a1a1a/C8A45C?text=Lapis+Lazuli"}'::text[] WHERE slug = 'lapis-lazuli-wisdom';
+UPDATE products SET images = '{"https://placehold.co/600x600/1a1a1a/C8A45C?text=Howlite","https://placehold.co/600x600/1a1a1a/C8A45C?text=Calm"}'::text[] WHERE slug = 'howlite-calming';
+UPDATE products SET images = '{"https://placehold.co/600x600/1a1a1a/C8A45C?text=Sodalite","https://placehold.co/600x600/1a1a1a/C8A45C?text=Communication"}'::text[] WHERE slug = 'sodalite-logic-communication';
+UPDATE products SET images = '{"https://placehold.co/600x600/1a1a1a/C8A45C?text=Turquoise","https://placehold.co/600x600/1a1a1a/C8A45C?text=Wrap"}'::text[] WHERE slug = 'natural-turquoise-wrap';
+UPDATE products SET images = '{"https://placehold.co/600x600/1a1a1a/C8A45C?text=Moonstone","https://placehold.co/600x600/1a1a1a/C8A45C?text=Intuition"}'::text[] WHERE slug = 'moonstone-intuition';
+UPDATE products SET images = '{"https://placehold.co/600x600/1a1a1a/C8A45C?text=Red+Jasper","https://placehold.co/600x600/1a1a1a/C8A45C?text=Grounding"}'::text[] WHERE slug = 'red-jasper-grounding';
+UPDATE products SET images = '{"https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=600&h=600&fit=crop","https://placehold.co/600x600/1a1a1a/C8A45C?text=Clear+Quartz"}'::text[] WHERE slug = 'clear-quartz-master-healer';
+UPDATE products SET images = '{"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&h=600&fit=crop","https://placehold.co/600x600/1a1a1a/C8A45C?text=Amazonite"}'::text[] WHERE slug = 'amazonite-courage-truth';
+UPDATE products SET images = '{"https://placehold.co/600x600/1a1a1a/C8A45C?text=Hematite","https://placehold.co/600x600/1a1a1a/C8A45C?text=Grounding"}'::text[] WHERE slug = 'hematite-magnetic-grounding';
+UPDATE products SET images = '{"https://placehold.co/600x600/1a1a1a/C8A45C?text=Black+Onyx","https://placehold.co/600x600/1a1a1a/C8A45C?text=Self-Control"}'::text[] WHERE slug = 'black-onyx-self-control';
+UPDATE products SET images = '{"https://placehold.co/600x600/1a1a1a/C8A45C?text=Fluorite","https://placehold.co/600x600/1a1a1a/C8A45C?text=Focus"}'::text[] WHERE slug = 'fluorite-focus-balance';
+UPDATE products SET images = '{"https://placehold.co/600x600/1a1a1a/C8A45C?text=Jade","https://placehold.co/600x600/1a1a1a/C8A45C?text=Prosperity"}'::text[] WHERE slug = 'jade-prosperity-charm';
+UPDATE products SET images = '{"https://placehold.co/600x600/1a1a1a/C8A45C?text=Aromatherapy","https://placehold.co/600x600/1a1a1a/C8A45C?text=Lavender"}'::text[] WHERE slug = 'lavender-aromatherapy-bracelet';

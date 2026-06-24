@@ -1,0 +1,79 @@
+:root {
+  --bg: #0A0A0A;
+  --surface: #1A1A1A;
+  --card: #222;
+  --gold: #C8A45C;
+  --cream: #F5F0E8;
+  --copper: #8B6F47;
+  --serif: 'Georgia', serif;
+  --sans: 'Helvetica', 'Arial', sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); text-decoration: none; }
+button {
+  cursor: pointer; border: none; font-family: var(--sans);
+}
+
+/* Nav */
+.nav-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px; background: rgba(10,10,10,0.92); backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(200,164,92,0.15);
+}
+.nav-brand { font-family: var(--serif); font-size: 22px; color: var(--gold); letter-spacing: 3px; }
+.nav-links { display: flex; gap: 20px; }
+.nav-links a { font-size: 13px; color: var(--cream); opacity: .7; text-transform: uppercase; letter-spacing: 1px; }
+.nav-links a:hover { opacity: 1; color: var(--gold); }
+main { padding-top: 64px; }
+
+/* Buttons */
+.btn-gold {
+  background: transparent; border: 1px solid var(--gold); color: var(--gold);
+  padding: 12px 24px; border-radius: 12px; font-size: 14px; font-weight: 600;
+  transition: all .2s;
+}
+.btn-gold:hover { background: var(--gold); color: var(--bg); }
+.btn-gold:disabled { opacity: .4; cursor: default; }
+
+/* Cards */
+.card {
+  background: var(--surface); border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(200,164,92,0.1);
+}
+
+/* Inputs */
+input, textarea {
+  background: var(--surface); border: 1px solid rgba(200,164,92,0.2); border-radius: 8px;
+  padding: 12px 16px; color: var(--cream); font-size: 14px; width: 100%;
+  outline: none; transition: border-color .2s;
+}
+input:focus { border-color: var(--gold); }
+
+/* Grid helpers */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Spinner */
+.spinner {
+  width: 24px; height: 24px; border: 3px solid rgba(200,164,92,0.2);
+  border-top-color: var(--gold); border-radius: 50%; animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Product card */
+.product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 20px; }
+
+.fav-btn {
+  position:absolute; top:8px; right:8px; width:32px; height:32px;
+  background:rgba(10,10,10,0.5); border-radius:50%; display:flex;
+  align-items:center; justify-content:center; font-size:15px;
+  cursor:pointer; z-index:2; line-height:1;
+}
+.fav-btn:hover { background:rgba(10,10,10,0.7); }
+.card-img { position:relative; }

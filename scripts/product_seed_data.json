@@ -1,0 +1,222 @@
+[
+  {
+    "name": "Amethyst Spiritual Protection Bracelet",
+    "slug": "amethyst-spiritual-protection",
+    "description": "Hand-strung natural amethyst beads in deep violet hues, known for spiritual protection and intuitive clarity. Each 8mm bead is polished to a smooth satin finish and knotted on durable elastic silk for easy wear. A staple for anyone seeking calm and spiritual awareness.",
+    "price_cents": 4499,
+    "category": "crystal",
+    "tags": ["amethyst", "protection", "spiritual", "chakra"],
+    "materials": "{\"main_stone\":\"Amethyst\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"Brazil\"}",
+    "stock": 65,
+    "unsplash_queries": ["crystal bracelet amethyst close-up", "purple gemstone bracelet hand", "natural amethyst beaded bracelet"]
+  },
+  {
+    "name": "Rose Quartz Love Bracelet",
+    "slug": "rose-quartz-love",
+    "description": "A soft pink gemstone bracelet crafted with genuine rose quartz beads to attract love and self-compassion. The gentle rose tones complement any outfit while promoting emotional healing. Perfect as a meaningful gift or personal talisman for opening the heart chakra.",
+    "price_cents": 3999,
+    "category": "crystal",
+    "tags": ["rose quartz", "love", "heart chakra", "self-care"],
+    "materials": "{\"main_stone\":\"Rose Quartz\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"Brazil\"}",
+    "stock": 80,
+    "unsplash_queries": ["rose quartz bracelet pink", "beaded love bracelet crystal", "pink gemstone bracelet fashion"]
+  },
+  {
+    "name": "Tiger Eye Confidence Bracelet",
+    "slug": "tiger-eye-confidence",
+    "description": "Bold golden-brown tiger eye beads with a distinctive silky chatoyancy that catches every light. Known as a stone of courage and willpower, this bracelet helps ground the wearer while boosting confidence. Each bead is hand-selected for its signature tiger-stripe luster.",
+    "price_cents": 4299,
+    "category": "stone",
+    "tags": ["tiger eye", "confidence", "grounding", "courage"],
+    "materials": "{\"main_stone\":\"Tiger Eye\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"South Africa\"}",
+    "stock": 55,
+    "unsplash_queries": ["tiger eye bracelet gold brown", "golden stone bracelet macro", "chatoyant gemstone bracelet"]
+  },
+  {
+    "name": "Black Obsidian Protection Bracelet",
+    "slug": "black-obsidian-protection",
+    "description": "Sleek black obsidian beads polished to a mirror-like sheen, traditionally used as a powerful psychic shield against negative energy. The dark glassy surface absorbs and transmutes low vibrations. A minimalist essential for energetic protection and strong grounding.",
+    "price_cents": 3699,
+    "category": "stone",
+    "tags": ["obsidian", "protection", "grounding", "black stone"],
+    "materials": "{\"main_stone\":\"Black Obsidian\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"Mexico\"}",
+    "stock": 90,
+    "unsplash_queries": ["black obsidian bracelet", "black stone beaded bracelet", "dark gemstone bracelet close-up"]
+  },
+  {
+    "name": "Citrine Wealth Attraction Bracelet",
+    "slug": "citrine-wealth-attraction",
+    "description": "Warm golden citrine beads radiating with solar energy, long revered as the merchant's stone for abundance and success. Each bead glows with sunny yellow-orange tones that brighten any wrist. Ideal for manifesting prosperity and maintaining an optimistic outlook.",
+    "price_cents": 4799,
+    "category": "crystal",
+    "tags": ["citrine", "abundance", "wealth", "solar plexus"],
+    "materials": "{\"main_stone\":\"Citrine\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"Brazil\"}",
+    "stock": 45,
+    "unsplash_queries": ["citrine bracelet yellow gold", "golden crystal bracelet hand", "yellow gemstone abundance bracelet"]
+  },
+  {
+    "name": "Green Aventurine Luck Bracelet",
+    "slug": "green-aventurine-luck",
+    "description": "Vibrant green aventurine beads flecked with natural shimmer, believed to attract luck and open new opportunities. The soothing sage-green color also supports heart-centered calm and emotional balance. A popular everyday piece for manifesting fortune and growth.",
+    "price_cents": 3899,
+    "category": "crystal",
+    "tags": ["aventurine", "luck", "prosperity", "heart chakra"],
+    "materials": "{\"main_stone\":\"Green Aventurine\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"India\"}",
+    "stock": 70,
+    "unsplash_queries": ["green aventurine bracelet", "green stone crystal bracelet", "natural green beaded bracelet"]
+  },
+  {
+    "name": "Carnelian Creativity Bracelet",
+    "slug": "carnelian-creativity",
+    "description": "Fiery orange-red carnelian beads with a translucent glow that energizes and inspires creative flow. Known for boosting motivation and courage, this bracelet ignites the sacral chakra. The warm earth tones make it a bold statement piece for the stylish spiritual seeker.",
+    "price_cents": 3999,
+    "category": "crystal",
+    "tags": ["carnelian", "creativity", "motivation", "sacral chakra"],
+    "materials": "{\"main_stone\":\"Carnelian\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"Madagascar\"}",
+    "stock": 50,
+    "unsplash_queries": ["carnelian bracelet orange red", "orange gemstone bracelet macro", "fiery crystal bracelet close-up"]
+  },
+  {
+    "name": "Lapis Lazuli Wisdom Bracelet",
+    "slug": "lapis-lazuli-wisdom",
+    "description": "Deep royal blue lapis lazuli beads flecked with golden pyrite, worn since antiquity for wisdom and truth. This striking bracelet connects to the throat and third eye chakras, enhancing communication and intuition. Each bead captures the essence of a starry night sky.",
+    "price_cents": 5299,
+    "category": "stone",
+    "tags": ["lapis lazuli", "wisdom", "intuition", "throat chakra"],
+    "materials": "{\"main_stone\":\"Lapis Lazuli\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"Afghanistan\"}",
+    "stock": 35,
+    "unsplash_queries": ["lapis lazuli bracelet blue gold", "blue gemstone bracelet hand", "gold fleck stone bracelet"]
+  },
+  {
+    "name": "Howlite Calming Bracelet",
+    "slug": "howlite-calming",
+    "description": "White howlite beads with delicate grey veining that evoke a peaceful, meditative stillness. Known for calming an overactive mind and promoting restful sleep. The neutral marble-like appearance pairs elegantly with any wardrobe, making it a versatile daily companion.",
+    "price_cents": 3599,
+    "category": "stone",
+    "tags": ["howlite", "calming", "anxiety", "meditation"],
+    "materials": "{\"main_stone\":\"Howlite\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"USA\"}",
+    "stock": 60,
+    "unsplash_queries": ["white howlite bracelet", "marble stone bracelet", "white beaded calming bracelet"]
+  },
+  {
+    "name": "Sodalite Logic & Communication Bracelet",
+    "slug": "sodalite-logic-communication",
+    "description": "Navy blue sodalite beads streaked with white calcite that promote rational thought and clear expression. This bracelet aligns the throat chakra for articulate communication while calming the mind. The deep indigo shade adds an understated pop of color to neutral outfits.",
+    "price_cents": 4199,
+    "category": "stone",
+    "tags": ["sodalite", "communication", "logic", "throat chakra"],
+    "materials": "{\"main_stone\":\"Sodalite\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"Canada\"}",
+    "stock": 40,
+    "unsplash_queries": ["sodalite bracelet blue white", "navy stone beaded bracelet", "blue crystal bracelet macro"]
+  },
+  {
+    "name": "Natural Turquoise Wrap Bracelet",
+    "slug": "natural-turquoise-wrap",
+    "description": "Genuine turquoise nuggets in a multi-wrap design with warm copper accents, inspired by Southwestern artisan traditions. Each stone features unique matrix veining, making every piece one-of-a-kind. A bold spiritual accessory with centuries of protective lore across cultures.",
+    "price_cents": 6999,
+    "category": "stone",
+    "tags": ["turquoise", "wrap bracelet", "southwestern", "protection"],
+    "materials": "{\"main_stone\":\"Turquoise\",\"bead_size\":\"6-10mm nugget\",\"string_type\":\"Waxed cotton cord\",\"accent\":\"Copper beads\",\"origin\":\"USA\"}",
+    "stock": 25,
+    "unsplash_queries": ["turquoise bracelet wrap style", "blue turquoise jewelry hand", "southwestern turquoise bracelet"]
+  },
+  {
+    "name": "Moonstone Intuition Bracelet",
+    "slug": "moonstone-intuition",
+    "description": "Pearly white moonstone beads with an ethereal blue adularescence that shifts with every movement. Connected to lunar energy and divine feminine intuition, this bracelet nurtures emotional balance and inner knowing. The subtle shimmer makes it an enchanting piece for both day and evening wear.",
+    "price_cents": 4899,
+    "category": "crystal",
+    "tags": ["moonstone", "intuition", "feminine", "third eye"],
+    "materials": "{\"main_stone\":\"Moonstone\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"India\"}",
+    "stock": 30,
+    "unsplash_queries": ["moonstone bracelet white blue", "iridescent crystal bracelet", "pearl shimmer bracelet hand"]
+  },
+  {
+    "name": "Red Jasper Grounding Bracelet",
+    "slug": "red-jasper-grounding",
+    "description": "Rich brick-red jasper beads with natural earthy patterning that connect you to the root chakra and physical vitality. This stabilizing stone is prized for endurance and steady energy throughout the day. A rugged, masculine-friendly crystal bracelet with a natural matte finish.",
+    "price_cents": 3799,
+    "category": "stone",
+    "tags": ["red jasper", "grounding", "root chakra", "vitality"],
+    "materials": "{\"main_stone\":\"Red Jasper\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"South Africa\"}",
+    "stock": 55,
+    "unsplash_queries": ["red jasper bracelet", "red stone beaded bracelet", "natural earthy bracelet close-up"]
+  },
+  {
+    "name": "Clear Quartz Master Healer Bracelet",
+    "slug": "clear-quartz-master-healer",
+    "description": "Crystal-clear quartz beads with internal rainbow fractures that amplify intention and energy work. Known as the master healer, clear quartz works with all chakras and can be programmed for any purpose. The bright translucent beads catch the light beautifully as a daily crystal companion.",
+    "price_cents": 4599,
+    "category": "crystal",
+    "tags": ["clear quartz", "master healer", "versatile", "amplification"],
+    "materials": "{\"main_stone\":\"Clear Quartz\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"Brazil\"}",
+    "stock": 75,
+    "unsplash_queries": ["clear quartz bracelet crystal", "transparent gemstone bracelet", "white crystal healing bracelet"]
+  },
+  {
+    "name": "Amazonite Courage & Truth Bracelet",
+    "slug": "amazonite-courage-truth",
+    "description": "Tranquil turquoise-green amazonite beads with subtle striations that soothe the nervous system and encourage authentic self-expression. This stone filters out electromagnetic stress while speaking your truth with confidence. The cool pastel hue works beautifully as a summer accessory.",
+    "price_cents": 4399,
+    "category": "stone",
+    "tags": ["amazonite", "truth", "courage", "throat chakra"],
+    "materials": "{\"main_stone\":\"Amazonite\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"Brazil\"}",
+    "stock": 40,
+    "unsplash_queries": ["amazonite bracelet turquoise green", "seafoam stone bracelet", "calming blue green crystal bracelet"]
+  },
+  {
+    "name": "Hematite Magnetic Grounding Bracelet",
+    "slug": "hematite-magnetic-grounding",
+    "description": "Silver-grey hematite beads with a high-polish metallic mirror finish that feel weighty and satisfying on the wrist. Known for grounding excess energy and improving focus, this bracelet is a favorite among minimalist styles. The neutral metallic tone complements both casual and formal looks.",
+    "price_cents": 3499,
+    "category": "stone",
+    "tags": ["hematite", "grounding", "focus", "minimalist"],
+    "materials": "{\"main_stone\":\"Hematite\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"Brazil\"}",
+    "stock": 85,
+    "unsplash_queries": ["hematite bracelet silver grey", "metallic stone bracelet macro", "black grey beaded bracelet close-up"]
+  },
+  {
+    "name": "Black Onyx Self-Control Bracelet",
+    "slug": "black-onyx-self-control",
+    "description": "Deep black onyx beads polished to a vitreous gloss, long used for self-mastery, protection, and making wise decisions under pressure. The uniform jet-black appearance creates a sophisticated, streamlined look for daily wear. A powerful ally for those navigating high-stakes environments.",
+    "price_cents": 3999,
+    "category": "stone",
+    "tags": ["black onyx", "self-control", "protection", "professional"],
+    "materials": "{\"main_stone\":\"Black Onyx\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"India\"}",
+    "stock": 65,
+    "unsplash_queries": ["black onyx bracelet", "black stone jewelry hand", "onyx beaded bracelet close-up"]
+  },
+  {
+    "name": "Flourite Focus & Balance Bracelet",
+    "slug": "fluorite-focus-balance",
+    "description": "Multicolored fluorite beads in bands of green, purple, and blue that enhance concentration and mental clarity. This rainbow crystal harmonizes scattered thoughts and brings structure to chaos. Each bead displays a unique ribboned pattern, making every bracelet visually distinct.",
+    "price_cents": 4499,
+    "category": "crystal",
+    "tags": ["fluorite", "focus", "balance", "third eye"],
+    "materials": "{\"main_stone\":\"Fluorite\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic silk\",\"origin\":\"China\"}",
+    "stock": 45,
+    "unsplash_queries": ["fluorite bracelet multi color", "rainbow crystal bracelet", "purple green stone bracelet hand"]
+  },
+  {
+    "name": "Jade Prosperity Charm Bracelet",
+    "slug": "jade-prosperity-charm",
+    "description": "Smooth green jade beads paired with a small gold-plated prosperity charm, drawing on centuries of East Asian tradition for luck and abundance. The cool jade tones signify harmony and virtue while the charm adds a subtle tinkle. A timeless piece that bridges cultural heritage with modern style.",
+    "price_cents": 5799,
+    "category": "jade",
+    "tags": ["jade", "prosperity", "charm", "harmony"],
+    "materials": "{\"main_stone\":\"Jade\",\"bead_size\":\"8mm\",\"string_type\":\"Silk cord with knotting\",\"accent\":\"Gold-plated charm\",\"origin\":\"Myanmar\"}",
+    "stock": 30,
+    "unsplash_queries": ["green jade bracelet charm", "japanese jade bracelet hand", "green stone prosperity bracelet"]
+  },
+  {
+    "name": "Lavender Aromatherapy Essential Oil Bracelet",
+    "slug": "lavender-aromatherapy-bracelet",
+    "description": "A diffuser bracelet with a porous lava stone center bead for absorbing lavender essential oil, combined with soothing amethyst accents. Simply apply a drop of your favorite oil to the lava bead for calming aromatherapy on-the-go. The elastic design fits most wrists and the scent lasts all day.",
+    "price_cents": 4999,
+    "category": "aromatherapy",
+    "tags": ["aromatherapy", "lavender", "lava stone", "calming"],
+    "materials": "{\"main_stone\":\"Lava Stone\",\"accent_stone\":\"Amethyst\",\"bead_size\":\"8mm\",\"string_type\":\"Elastic cord\",\"diffuser_type\":\"Porous lava bead\"}",
+    "stock": 50,
+    "unsplash_queries": ["aromatherapy bracelet lava stone", "essential oil diffuser bracelet", "lavender aromatherapy jewelry"]
+  }
+]
