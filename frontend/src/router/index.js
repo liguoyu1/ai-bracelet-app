@@ -12,6 +12,7 @@ const routes = [
   { path: '/order', name: 'order', component: () => import('../views/Order.vue') },
   { path: '/order-status', name: 'order-status', component: () => import('../views/OrderStatus.vue') },
   { path: '/admin', name: 'admin', component: () => import('../views/Admin.vue') },
+  { path: '/terms', name: 'terms', component: () => import('../views/Terms.vue') },
 ]
 
 export default createRouter({

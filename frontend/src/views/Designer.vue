@@ -119,12 +119,43 @@
           <span v-if="_saving" class="spinner" style="width:16px;height:16px;border-width:2px"></span>
           <span v-else>{{ t('designer.save') || 'Save' }}</span>
         </button>
-        <button class="btn-publish" :disabled="_saving || !_placed.length" @click="saveDesign(true)">
+        <button class="btn-publish" :disabled="_saving || !_placed.length" @click="_showCopyright = true">
           <span v-if="_saving" class="spinner" style="width:16px;height:16px;border-width:2px"></span>
           <span v-else>{{ t('designer.publish') || 'Publish' }}</span>
         </button>
       </div>
     </template>
+
+    <!-- Copyright Confirmation Modal -->
+    <Teleport to="body">
+      <div v-if="_showCopyright" class="copyright-overlay" @click.self="_showCopyright = false">
+        <div class="copyright-modal">
+          <h3>{{ t('designer.copyrightTitle') || 'Design Copyright Agreement' }}</h3>
+          <div class="copyright-body">
+            <p>{{ t('designer.copyrightText1') || 'By publishing this design, you agree that:' }}</p>
+            <ul>
+              <li>{{ t('designer.copyright1') || 'The copyright of this design belongs to you as the author.' }}</li>
+              <li>{{ t('designer.copyright2') || 'The platform is authorized to produce and sell this design.' }}</li>
+              <li>{{ t('designer.copyright3') || 'You will receive a commission for each sale of your design.' }}</li>
+              <li>{{ t('designer.copyright4') || 'This agreement cannot be revoked once published.' }}</li>
+            </ul>
+            <router-link to="/terms" class="terms-link" @click.stop>{{ t('terms.title') || 'Terms of Service' }}</router-link>
+          </div>
+          <div class="copyright-actions">
+            <label class="copyright-check">
+              <input type="checkbox" v-model="_copyrightAccepted" />
+              <span>{{ t('designer.copyrightAccept') || 'I understand and agree to these terms' }}</span>
+            </label>
+            <div class="copyright-btns">
+              <button class="btn-cancel" @click="_showCopyright = false">{{ t('designer.cancel') || 'Cancel' }}</button>
+              <button class="btn-gold-solid" :disabled="!_copyrightAccepted" @click="_showCopyright = false; saveDesign(true)">
+                {{ t('designer.confirmPublish') || 'Confirm & Publish' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Teleport>
   </div>
 </template>
 
@@ -140,6 +171,8 @@ const router = useRouter()
 // State
 const _loading = ref(true)
 const _saving = ref(false)
+const _copyrightAccepted = ref(false)
+const _showCopyright = ref(false)
 const _elements = ref([])
 const _placed = ref([])
 const _selectedString = ref(null)
@@ -668,4 +701,24 @@ onMounted(() => {
   color: rgba(245,240,232,0.35);
   font-size: 14px;
 }
+/* Copyright Modal */
+.copyright-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.7);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.copyright-modal {
+  background: #1a1a1a; border: 1px solid #333; border-radius: 12px;
+  padding: 28px; max-width: 460px; width: 100%;
+}
+.copyright-modal h3 { color: #C8A45C; margin: 0 0 16px; font-size: 18px; }
+.copyright-body { margin-bottom: 20px; }
+.copyright-body p { color: rgba(245,240,232,0.8); margin: 0 0 12px; font-size: 14px; line-height: 1.5; }
+.copyright-body ul { margin: 0; padding-left: 20px; }
+.copyright-body li { color: rgba(245,240,232,0.7); font-size: 13px; line-height: 1.6; }
+.copyright-check { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 16px; cursor: pointer; }
+.copyright-check input { margin-top: 3px; }
+.copyright-check span { font-size: 13px; color: rgba(245,240,232,0.7); }
+.copyright-btns { display: flex; gap: 12px; justify-content: flex-end; }
 </style>

@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -221,7 +222,7 @@ func (h *ProductHandler) Get(w http.ResponseWriter, r *http.Request) {
 	var i18nVal interface{}
 	err := h.Pool.QueryRow(r.Context(),
 	`SELECT id, name, slug, description, price_cents, images, category, tags, materials, stock, sales_count, created_at, updated_at, i18n
-		 FROM products WHERE (id=$1::uuid OR slug=$1)`, id,
+		 FROM products WHERE id::text = $1`, id,
 	).Scan(&p.ID, &p.Name, &p.Slug, &p.Description, &p.PriceCents, &p.Images, &p.Category, &p.Tags, &p.Materials, &p.Stock, &p.SalesCount, &p.CreatedAt, &p.UpdatedAt, &i18nVal)
 	if err != nil {
 		fail(w, 404, "product not found: "+err.Error())
@@ -244,6 +245,37 @@ func (h *ProductHandler) Get(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	success(w, p)
+}
+
+func (h *ProductHandler) AdminList(w http.ResponseWriter, r *http.Request) {
+	limit := queryParam(r, "limit", "20")
+	offset := parseInt(queryParam(r, "offset", "0"), 0)
+	rows, err := h.Pool.Query(r.Context(),
+		`SELECT id, name, slug, description, price_cents, images, category, tags, materials, stock, is_active, sales_count, created_at, updated_at
+		 FROM products ORDER BY created_at DESC LIMIT $1 OFFSET $2`, parseInt(limit, 20), offset)
+	if err != nil {
+		fail(w, 500, "failed to query products: "+err.Error())
+		return
+	}
+	defer rows.Close()
+	products := []models.Product{}
+	for rows.Next() {
+		var p models.Product
+		if err := rows.Scan(&p.ID, &p.Name, &p.Slug, &p.Description, &p.PriceCents, &p.Images, &p.Category, &p.Tags, &p.Materials, &p.Stock, &p.IsActive, &p.SalesCount, &p.CreatedAt, &p.UpdatedAt); err != nil {
+			continue
+		}
+		if p.Images == nil {
+			p.Images = []string{}
+		}
+		if p.Tags == nil {
+			p.Tags = []string{}
+		}
+		products = append(products, p)
+	}
+	if products == nil {
+		products = []models.Product{}
+	}
+	success(w, products)
 }
 
 func (h *ProductHandler) Create(w http.ResponseWriter, r *http.Request) {
@@ -329,6 +361,46 @@ func (h *DesignElementHandler) List(w http.ResponseWriter, r *http.Request) {
 		elements = []models.DesignElement{}
 	}
 	success(w, elements)
+}
+
+func (h *DesignElementHandler) AdminList(w http.ResponseWriter, r *http.Request) {
+	rows, err := h.Pool.Query(r.Context(),
+		`SELECT id, name, type, color, material, shape, size_mm, image_url, price_cents, stock, is_active, created_at
+		 FROM design_elements ORDER BY created_at DESC`)
+	if err != nil {
+		fail(w, 500, "failed to query elements: "+err.Error())
+		return
+	}
+	defer rows.Close()
+	elements := []models.DesignElement{}
+	for rows.Next() {
+		var e models.DesignElement
+		if err := rows.Scan(&e.ID, &e.Name, &e.Type, &e.Color, &e.Material, &e.Shape, &e.SizeMm, &e.ImageURL, &e.PriceCents, &e.Stock, &e.IsActive, &e.CreatedAt); err != nil {
+			continue
+		}
+		elements = append(elements, e)
+	}
+	if elements == nil {
+		elements = []models.DesignElement{}
+	}
+	success(w, elements)
+}
+
+func (h *DesignElementHandler) AdminUpdate(w http.ResponseWriter, r *http.Request) {
+	id := extractID(r)
+	var e models.DesignElement
+	if err := decode(r, &e); err != nil {
+		fail(w, 400, "invalid request")
+		return
+	}
+	_, err := h.Pool.Exec(r.Context(),
+		`UPDATE design_elements SET name=$1, type=$2, color=$3, material=$4, shape=$5, size_mm=$6, image_url=$7, price_cents=$8, stock=$9, is_active=$10 WHERE id=$11`,
+		e.Name, e.Type, e.Color, e.Material, e.Shape, e.SizeMm, e.ImageURL, e.PriceCents, e.Stock, e.IsActive, id)
+	if err != nil {
+		fail(w, 500, "failed to update element: "+err.Error())
+		return
+	}
+	success(w, map[string]string{"message": "element updated"})
 }
 
 func (h *DesignElementHandler) Create(w http.ResponseWriter, r *http.Request) {
@@ -775,6 +847,27 @@ func (h *EnergyHandler) Assess(w http.ResponseWriter, r *http.Request) {
 		 VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING id, created_at`,
 		userID, req.BirthDate, req.ZodiacSign, string(prefJSON), string(extraInput), string(recJSON), string(recJSON),
 	).Scan(&assessment.ID, &assessment.CreatedAt)
+
+	// Async AI enrichment via DeepSeek (non-blocking, best-effort)
+	if h.DeepSeekClient != nil && h.DeepSeekClient.APIKey != "" {
+		go func(aID, zodiac, element, concerns, lifestyle string) {
+			prompt := fmt.Sprintf(
+				"Generate a personalized crystal bracelet recommendation in JSON format.\nZodiac: %s\nElement: %s\nConcerns: %s\nLifestyle: %s\n"+
+					`Return ONLY valid JSON: {"explanation":"...","energy_focus":"...","daily_affirmation":"..."}`,
+				zodiac, element, concerns, lifestyle)
+			aiResp, err := h.DeepSeekClient.Ask(
+				"You are a crystal healing expert. Provide warm, personalized bracelet recommendations. Be concise and insightful.",
+				prompt)
+			if err != nil {
+				fmt.Printf("DeepSeek enrichment failed for assessment %s: %v\n", aID, err)
+				return
+			}
+			h.Pool.Exec(context.Background(),
+				`UPDATE energy_assessments SET ai_response = ai_response || $2 WHERE id = $1`,
+				aID, aiResp)
+		}(assessment.ID, req.ZodiacSign, recs[0].Element, req.Concerns, req.Lifestyle)
+	}
+
 	success(w, map[string]interface{}{"assessment_id": assessment.ID, "recommendations": recommendations})
 }
 
@@ -860,9 +953,12 @@ func (h *EarningsHandler) History(w http.ResponseWriter, r *http.Request) {
 	success(w, earnings)
 }
 
-type UploadHandler struct{}
+type UploadHandler struct{
+	Pool *pgxpool.Pool
+}
 
 func (h *UploadHandler) Upload(w http.ResponseWriter, r *http.Request) {
+	userID := middleware.GetUserID(r)
 	r.Body = http.MaxBytesReader(w, r.Body, 10<<20)
 	if err := r.ParseMultipartForm(10 << 20); err != nil {
 		fail(w, 400, "file too large (max 10MB)")
@@ -875,17 +971,28 @@ func (h *UploadHandler) Upload(w http.ResponseWriter, r *http.Request) {
 	}
 	defer file.Close()
 	filename := fmt.Sprintf("%d_%s", time.Now().UnixNano(), header.Filename)
-		dst, err := os.Create("/data/uploads/" + filename)
+	dst, err := os.Create("/data/uploads/" + filename)
 	if err != nil {
 		fail(w, 500, "failed to save file: "+err.Error())
 		return
 	}
 	defer dst.Close()
-	if _, err := io.Copy(dst, file); err != nil {
+	written, err := io.Copy(dst, file)
+	if err != nil {
 		fail(w, 500, "failed to write file: "+err.Error())
 		return
 	}
-	success(w, map[string]interface{}{"url": "/uploads/" + filename, "filename": filename})
+	url := "/uploads/" + filename
+	// Persist to DB
+	if h.Pool != nil {
+		_, err := h.Pool.Exec(r.Context(),
+			`INSERT INTO uploads (user_id, filename, url, size_bytes, mime_type) VALUES ($1,$2,$3,$4,$5)`,
+			userID, filename, url, written, header.Header.Get("Content-Type"))
+		if err != nil {
+			fmt.Printf("Upload DB insert warning: %v\n", err)
+		}
+	}
+	success(w, map[string]interface{}{"url": url, "filename": filename, "size_bytes": written})
 }
 
 func parseInt(s string, def int) int {

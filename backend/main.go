@@ -39,6 +39,7 @@ func main() {
 	// Init services
 	airwallexClient := services.NewAirwallexClient(cfg.AirwallexClientID, cfg.AirwallexAPIKey)
 	airwallexClient.ReturnURL = cfg.FrontendURL + "/order/status"
+	airwallexClient.WebhookKey = cfg.AirwallexWebhookKey
 	deepSeekClient := services.NewDeepSeekClient(cfg.DeepSeekKey)
 
 	// Init handlers
@@ -50,7 +51,7 @@ func main() {
 	favH := &handlers.FavoriteHandler{Pool: pool}
 	energyH := &handlers.EnergyHandler{Pool: pool, DeepSeekClient: deepSeekClient}
 	earningsH := &handlers.EarningsHandler{Pool: pool}
-	uploadH := &handlers.UploadHandler{}
+	uploadH := &handlers.UploadHandler{Pool: pool}
 	webhookH := &handlers.WebhookHandler{Pool: pool, AirwallexClient: airwallexClient}
 
 	// Router
@@ -153,11 +154,14 @@ func main() {
 			r.Use(middleware.AdminOnly)
 
 			// Product management
+			r.Get("/api/admin/products", productH.AdminList)
 			r.Post("/api/admin/products", productH.Create)
 			r.Put("/api/admin/products/{id}", productH.Update)
 
 			// Design elements management
+			r.Get("/api/admin/elements", elemH.AdminList)
 			r.Post("/api/admin/elements", elemH.Create)
+			r.Put("/api/admin/elements/{id}", elemH.AdminUpdate)
 
 			// Order management
 			r.Put("/api/admin/orders/{id}/status", orderH.UpdateStatus)

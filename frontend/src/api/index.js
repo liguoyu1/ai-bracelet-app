@@ -40,13 +40,7 @@ export function getProducts(params) {
 }
 
 export function getProduct(id) {
-  return api.get(`/products?limit=247`).then(res => {
-    const products = res.data || []
-    const found = products.find(p => p.id === id)
-    if (found) return { data: found }
-    // fallback: try fetching from specific ID (for after backend fix)
-    return api.get(`/products/${id}`)
-  })
+  return api.get(`/products/${id}`)
 }
 
 export function getOrders() {
