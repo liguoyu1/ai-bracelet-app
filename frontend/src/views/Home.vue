@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <SingleChildScrollView>
+    <div class="home-scroll">
       <!-- HERO BANNER -->
       <section class="hero" :style="{ height: isShort ? '280px' : '400px' }">
         <div class="hero-deco">✦</div>
@@ -74,7 +74,7 @@
       </section>
 
       <div style="height:20px"></div>
-    </SingleChildScrollView>
+    </div>
   </div>
 </template>
 
