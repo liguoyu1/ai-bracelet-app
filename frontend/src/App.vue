@@ -8,6 +8,10 @@
         <span class="tab-icon">✦</span>
         <span class="tab-label">{{ t('nav.shop') }}</span>
       </router-link>
+      <router-link to="/designs" class="tab" :class="{ active: $route.path === '/designs' }">
+        <span class="tab-icon">♢</span>
+        <span class="tab-label">Community</span>
+      </router-link>
       <router-link to="/designer" class="tab" :class="{ active: $route.path === '/designer' }">
         <span class="tab-icon">◇</span>
         <span class="tab-label">{{ t('nav.designStudio') }}</span>
