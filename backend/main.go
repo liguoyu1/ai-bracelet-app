@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -73,6 +74,10 @@ func main() {
 		})
 	})
 	r.Post("/api/webhook/airwallex", webhookH.HandleAirwallex)
+
+	// Fix: drop broken UNIQUE constraint on orders.stripe_payment_intent_id
+	// (UNIQUE DEFAULT '' blocks all but first order)
+	pool.Exec(context.Background(), `ALTER TABLE orders DROP CONSTRAINT IF EXISTS orders_stripe_payment_intent_id_key`)
 
 	// Auth (public)
 	r.Post("/api/auth/register", authH.Register)
