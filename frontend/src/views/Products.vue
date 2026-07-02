@@ -105,9 +105,12 @@ let searchTimer = null
 const filters = [
   { key: '', label: t('products.all') },
   { key: 'crystal', label: 'Crystal' },
+  { key: 'stone', label: 'Stone' },
   { key: 'jade', label: 'Jade' },
-  { key: 'amber', label: 'Amber' },
-  { key: 'lava', label: 'Lava' },
+  { key: 'pearl', label: 'Pearl' },
+  { key: 'aromatherapy', label: 'Aromatherapy' },
+  { key: 'wood', label: 'Wood' },
+  { key: 'mixed', label: 'Mixed' },
 ]
 
 const hasMore = computed(() => products.value.length < total.value)

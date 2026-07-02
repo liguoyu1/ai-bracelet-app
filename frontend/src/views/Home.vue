@@ -93,9 +93,11 @@ const isShort = ref(false)
 
 const categories = [
   { key: 'crystal', name: 'Crystal', icon: '💎' },
+  { key: 'stone', name: 'Stone', icon: '⛰️' },
   { key: 'jade', name: 'Jade', icon: '🌿' },
-  { key: 'amber', name: 'Amber', icon: '💧' },
-  { key: 'lava', name: 'Lava', icon: '🔥' },
+  { key: 'pearl', name: 'Pearl', icon: '🦪' },
+  { key: 'aromatherapy', name: 'Aromatherapy', icon: '🌸' },
+  { key: 'wood', name: 'Wood', icon: '🪵' },
 ]
 
 function formatPrice(cents) { return '$' + (cents / 100).toFixed(2) }

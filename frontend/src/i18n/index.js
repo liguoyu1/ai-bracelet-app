@@ -55,6 +55,11 @@ const t = {
   'products.defaultDescription': { en: 'Handcrafted with precision, each bead is selected for its unique energy properties. Ethically sourced and individually inspected to ensure the highest standard of quality and beauty.', zh: '精工制作，每颗珠子都因其独特的能量特性而精选。道德采购，逐个检查，确保最高品质与美感。', ja: '精密に作られ、各ビーズはそのユニークなエネルギー特性のために選ばれています。', ko: '정밀하게 제작된 각 구슬은 독특한 에너지 특성을 위해 선택되었습니다.', ru: 'Изготовлено с точностью, каждая бусина выбрана за её уникальные энергетические свойства.', fr: 'Fabriqué avec précision, chaque perle est sélectionnée pour ses propriétés énergétiques uniques.', de: 'Mit Präzision handgefertigt, jede Perle ist für ihre einzigartigen energetischen Eigenschaften ausgewählt.' },
   'products.loadMore': { en: 'Load More', zh: '加载更多', ja: 'もっと見る', ko: '더 보기', ru: 'Загрузить ещё', fr: 'Voir Plus', de: 'Mehr laden' },
 
+  'product.addToCart': { en: 'Add to Cart', zh: '加入购物车', ja: 'カートに入れる', ko: '장바구니 담기', ru: 'В корзину', fr: 'Ajouter au Panier', de: 'In den Warenkorb' },
+  'product.reviews': { en: 'Reviews', zh: '评价', ja: 'レビュー', ko: '리뷰', ru: 'Отзывы', fr: 'Avis', de: 'Bewertungen' },
+  'product.youMayAlsoLike': { en: 'You May Also Like', zh: '猜你喜欢', ja: 'おすすめ', ko: '추천 상품', ru: 'Вам также может понравиться', fr: 'Vous Aimerez Aussi', de: 'Das könnte dir auch gefallen' },
+  'product.buyItNow': { en: 'Buy It Now', zh: '立即购买', ja: '今すぐ買う', ko: '바로 구매', ru: 'Купить сейчас', fr: 'Acheter Maintenant', de: 'Jetzt kaufen' },
+
   'cart.title': { en: 'Cart', zh: '购物车', ja: 'カート', ko: '장바구니', ru: 'Корзина', fr: 'Panier', de: 'Warenkorb' },
   'cart.empty': { en: 'Your cart is empty', zh: '购物车是空的', ja: 'カートは空です', ko: '장바구니가 비었습니다', ru: 'Корзина пуста', fr: 'Votre panier est vide', de: 'Ihr Warenkorb ist leer' },
   'cart.emptySubtitle': { en: 'Browse products or design your own', zh: '浏览产品或自己设计', ja: '商品を見るか自分でデザイン', ko: '제품을 둘러보거나 직접 디자인하세요', ru: 'Посмотрите товары или создайте свой', fr: 'Parcourez ou créez le vôtre', de: 'Produkte durchstöbern oder eigenes Design' },
@@ -175,7 +180,8 @@ const t = {
 
 export function tr(key, lang) {
   const l = lang || currentLang
-  return t[key]?.[l] || t[key]?.['en'] || key
+  const v = t[key]?.[l] || t[key]?.['en']
+  return v || ''
 }
 
 export { locales, flags, names }

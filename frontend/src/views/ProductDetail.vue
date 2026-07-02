@@ -83,7 +83,10 @@
             <button class="pd-qty-btn" @click="qty++">+</button>
           </div>
           <button class="pd-add-btn" @click="addToCart">
-            {{ t('product.addToCart') || 'Add to Cart' }} — {{ formatPrice(product.price_cents * qty) }}
+            {{ t('product.addToCart') }} — {{ formatPrice(product.price_cents * qty) }}
+          </button>
+          <button class="pd-buy-btn" @click="buyNow">
+            {{ t('product.buyItNow') }}
           </button>
         </div>
 
@@ -224,6 +227,19 @@ function addToCart() {
   }
   qty.value = 1
   showSnackbar('Added to cart')
+}
+
+function buyNow() {
+  cart.clear()
+  for (let i = 0; i < qty.value; i++) {
+    cart.addItem({
+      id: product.value.id,
+      name: product.value.name,
+      price_cents: product.value.price_cents,
+      images: product.value.images
+    })
+  }
+  router.push('/order')
 }
 
 onMounted(async () => {
@@ -519,6 +535,22 @@ onMounted(async () => {
 }
 .pd-add-btn:hover {
   background: #D4B06A;
+}
+.pd-buy-btn {
+  height: 40px;
+  border: 1px solid rgba(200,164,92,0.4);
+  border-radius: 12px;
+  background: transparent;
+  color: #C8A45C;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 16px;
+  white-space: nowrap;
+  transition: all .2s;
+}
+.pd-buy-btn:hover {
+  background: rgba(200,164,92,0.1);
 }
 
 /* Designer */
