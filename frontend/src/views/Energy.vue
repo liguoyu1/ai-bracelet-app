@@ -153,6 +153,11 @@
         </div>
       </div>
 
+      <div class="rec-cta">
+        <p class="rec-cta-text">Find bracelets matching your energy</p>
+        <router-link to="/products?cat=crystal" class="rec-cta-btn">Shop Crystal Bracelets →</router-link>
+      </div>
+
       <button class="btn-try-again" @click="reset">{{ t('energy.tryAgain') }}</button>
     </div>
   </div>
@@ -540,4 +545,10 @@ function reset() {
 .btn-try-again:hover {
   background: rgba(139,111,71,0.1);
 }
+
+/* CTA */
+.rec-cta { text-align: center; padding: 20px 0; margin-bottom: 16px; }
+.rec-cta-text { font-size: 14px; color: var(--cream); opacity: 0.6; margin-bottom: 12px; }
+.rec-cta-btn { display: inline-block; padding: 12px 32px; background: var(--gold); color: #000; border-radius: 12px; font-size: 15px; font-weight: 700; letter-spacing: 0.5px; text-decoration: none; transition: opacity .2s; }
+.rec-cta-btn:hover { opacity: 0.9; }
 </style>
