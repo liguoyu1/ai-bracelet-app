@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+RUN npm run build && grep -q "buyNow\|pd-specs\|rec-cta" dist/assets/index-*.js || (echo "ERROR: built JS missing expected features" && exit 1)
 
 FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
