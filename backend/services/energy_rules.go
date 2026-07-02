@@ -1,5 +1,7 @@
 package services
 
+import "strings"
+
 // EnergyRuleEngine provides deterministic crystal recommendations
 // based on zodiac sign, element, and user concerns.
 // No external API needed — reliable and zero-cost.
@@ -145,33 +147,5 @@ func NewEnergyRecommendations(zodiacSign, preferredElement, concerns, lifestyle 
 }
 
 func contains(s, substr string) bool {
-	return len(s) >= len(substr) && searchSubstring(toLower(s), toLower(substr))
-}
-
-func searchSubstring(s, sub string) bool {
-	for i := 0; i <= len(s)-len(sub); i++ {
-		match := true
-		for j := 0; j < len(sub); j++ {
-			if s[i+j] != sub[j] {
-				match = false
-				break
-			}
-		}
-		if match {
-			return true
-		}
-	}
-	return false
-}
-
-func toLower(s string) string {
-	b := make([]byte, len(s))
-	for i := 0; i < len(s); i++ {
-		c := s[i]
-		if c >= 'A' && c <= 'Z' {
-			c += 32
-		}
-		b[i] = c
-	}
-	return string(b)
+	return strings.Contains(strings.ToLower(s), strings.ToLower(substr))
 }

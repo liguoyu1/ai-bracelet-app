@@ -143,10 +143,10 @@ async function placeOrder() {
         phone: phone.value.trim(),
       },
       contact_email: email.value.trim(),
-      items: cart.items.map(i => ({ id: i.id, qty: i.qty || 1, price: i.price })),
+      items: cart.items.map(i => ({ item_type: 'product', item_id: i.id, quantity: i.qty || 1 })),
     })
     const order = res.data || res
-    const id = order.id || order._id
+    const id = order.order_id || order.id || order._id
     orderId.value = id
 
     // Get Stripe checkout URL

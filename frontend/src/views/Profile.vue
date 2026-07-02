@@ -412,6 +412,7 @@ onMounted(async () => {
     loadOrders()
     loadDesigns()
     loadEarningsData()
+    fav.syncFromBackend()
   }
 })
 </script>

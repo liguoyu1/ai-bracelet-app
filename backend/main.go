@@ -74,42 +74,6 @@ func main() {
 	})
 	r.Post("/api/webhook/airwallex", webhookH.HandleAirwallex)
 
-	// Temporary: manually run i18n migration (remove after DB column exists)
-	r.Post("/api/migrate-i18n", func(w http.ResponseWriter, r *http.Request) {
-		_, err1 := pool.Exec(r.Context(), `ALTER TABLE products ADD COLUMN IF NOT EXISTS i18n JSONB DEFAULT '{}'`)
-		_, err2 := pool.Exec(r.Context(), `ALTER TABLE design_elements ADD COLUMN IF NOT EXISTS i18n JSONB DEFAULT '{}'`)
-		if err1 != nil || err2 != nil {
-			errMsg := fmt.Sprintf("migration errors: %v / %v", err1, err2)
-			w.WriteHeader(500)
-			json.NewEncoder(w).Encode(map[string]interface{}{"success": false, "error": errMsg})
-			return
-		}
-		pool.Exec(r.Context(), `UPDATE products SET i18n = jsonb_set(COALESCE(i18n, '{}'::jsonb), '{zh,name}', '"水晶和谐手串"') WHERE slug = 'crystal-harmony'`)
-		pool.Exec(r.Context(), `UPDATE products SET i18n = jsonb_set(COALESCE(i18n, '{}'::jsonb), '{zh,name}', '"熔岩接地手串"') WHERE slug = 'lava-stone-grounding'`)
-		pool.Exec(r.Context(), `UPDATE products SET i18n = jsonb_set(COALESCE(i18n, '{}'::jsonb), '{zh,name}', '"玉石智慧手串"') WHERE slug = 'jade-wisdom'`)
-		pool.Exec(r.Context(), `UPDATE products SET i18n = jsonb_set(COALESCE(i18n, '{}'::jsonb), '{zh,name}', '"虎眼成功手串"') WHERE slug = 'tiger-eye-success'`)
-		pool.Exec(r.Context(), `UPDATE products SET i18n = jsonb_set(COALESCE(i18n, '{}'::jsonb), '{zh,name}', '"粉晶爱情手串"') WHERE slug = 'rose-quartz-love'`)
-		pool.Exec(r.Context(), `UPDATE products SET i18n = jsonb_set(COALESCE(i18n, '{}'::jsonb), '{zh,name}', '"黑曜石护盾手串"') WHERE slug = 'black-obsidian-shield'`)
-		pool.Exec(r.Context(), `UPDATE products SET i18n = jsonb_set(COALESCE(i18n, '{}'::jsonb), '{zh,name}', '"黄晶丰盛手串"') WHERE slug = 'citrine-abundance'`)
-		pool.Exec(r.Context(), `UPDATE products SET i18n = jsonb_set(COALESCE(i18n, '{}'::jsonb), '{zh,name}', '"芳香精油手串"') WHERE slug = 'aromatherapy-essential'`)
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]interface{}{"success": true, "data": map[string]string{"message": "i18n migration applied"}})
-	})
-
-	// Debug: check raw i18n for a product
-	r.Get("/api/debug-i18n", func(w http.ResponseWriter, r *http.Request) {
-		slug := r.URL.Query().Get("slug")
-		var i18nRaw []byte
-		err := pool.QueryRow(r.Context(), `SELECT i18n FROM products WHERE slug=$1`, slug).Scan(&i18nRaw)
-		if err != nil {
-			w.WriteHeader(404)
-			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
-			return
-		}
-		w.Header().Set("Content-Type", "application/json")
-		w.Write(i18nRaw)
-	})
-
 	// Auth (public)
 	r.Post("/api/auth/register", authH.Register)
 	r.Post("/api/auth/login", authH.Login)

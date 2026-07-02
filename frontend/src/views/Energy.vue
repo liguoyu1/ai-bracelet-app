@@ -145,10 +145,10 @@
         </div>
 
         <!-- Crystals -->
-        <div v-if="rec.crystals?.length" class="rec-section">
+        <div v-if="rec.crystal_suggestions?.length" class="rec-section">
           <h4 class="rec-section-title">{{ t('energy.crystals') }}</h4>
           <div class="chip-wrap">
-            <span v-for="c in rec.crystals" :key="c" class="chip chip-crystal">{{ c }}</span>
+            <span v-for="c in rec.crystal_suggestions" :key="c" class="chip chip-crystal">{{ c }}</span>
           </div>
         </div>
       </div>
@@ -231,7 +231,7 @@ async function assess() {
       concerns: concerns.value.trim(),
       lifestyle: lifestyle.value.trim(),
     })
-    _recommendations.value = res.recommendations || []
+    _recommendations.value = res.data?.recommendations || res.recommendations || []
     _assessed.value = true
   } catch (err) {
     _error.value = err?.error || t('energy.failed')
